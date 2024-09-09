@@ -4,21 +4,21 @@ def sort(arr):
     count_1=0
     count_2=0
     for num in arr:
-        if num==0
+        if num==0:
           count_0 +=1
-        elif num==1
+        elif num==1:
           count_1 +=1
         else:
           count_2 +=1
     index=0     
-    for i in range(count_0) 
+    for i in range(count_0):
         arr[index]=0
         index+=1
-    for i in range(count_1)   
+    for i in range(count_1): 
         arr[index]=1
         index+=1
         
-    for i in range(count_2)    
+    for i in range(count_2):
         arr[index]=2
         index+=1
 
