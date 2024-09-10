@@ -1,12 +1,17 @@
-def missing_no(array,n):
-   possible_sum=n*(n+1)//2
 
-   real_sum=sum(array)
+def find_missing_set(arr, n):
+    
+    full_set = set(range(1, n + 1))
+    
+    
+    for num in arr:
+        if num in full_set:
+            full_set.remove(num)
+    
+   
+    return full_set.pop()
 
-   missing_number=possible_sum-real_sum
-
-   return missing_number
-#example
-array=[1,2,4,5]
-n=sizeof(array)/sizeof(array[0])
-missing_no(array,n)
+# Example 
+arr = [1, 2, 4, 5]
+n = 4
+print(find_missing_set(arr, n))
