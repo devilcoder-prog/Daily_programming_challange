@@ -1,0 +1,12 @@
+def missing_no(array,n):
+   possible_sum=n*(n+1)//2
+
+   real_sum=sum(array)
+
+   missing_number=possible_sum-real_sum
+
+   return missing_number
+#example
+array=[1,2,4,5]
+n=sizeof(array)/sizeof(array[0])
+missing_no(array,n)
