@@ -1,0 +1,31 @@
+def reverse(s: str) -> str:
+    
+    s = s.strip()
+
+   
+    n = len(s)
+    i = n - 1
+    result = []
+    word = []
+    
+    
+    while i >= 0:
+        if s[i] != ' ':
+            word.append(s[i])
+        elif word:
+            
+            result.append(''.join(reversed(word)))
+            word = []
+        i -= 1
+    
+    
+    if word:
+        result.append(''.join(reversed(word)))
+    
+  
+    return ' '.join(result)
+
+# Example 
+s = " the sky is blue "
+print(f"[{reverse(s)}]")  
+
