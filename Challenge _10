@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+    vector<vector<string>> result;
+    
+    for (string str : strs) {
+        string sortedStr = str;
+        sort(sortedStr.begin(), sortedStr.end());
+        
+        bool added = false;
+        
+        
+        for (auto& group : result) {
+            string sortedGroupStr = group[0];  
+            sort(sortedGroupStr.begin(), sortedGroupStr.end());
+            
+            if (sortedGroupStr == sortedStr) {
+                group.push_back(str);  
+                added = true;
+                break;
+            }
+        }
+        if (!added) {
+            result.push_back({str});
+        }
+    }
+    
+    return result;
+}
+
+int main() {
+    vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+    vector<vector<string>> anagrams = groupAnagrams(strs);
+
+    for (const auto& group : anagrams) {
+        for (const string& word : group) {
+            cout << word << " ";
+        }
+        cout << endl;
+    }
+    
+    return 0;
+}
