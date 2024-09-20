@@ -1,0 +1,35 @@
+def isValid(s: str) -> bool:
+    parentheses = 0
+    curly_braces = 0
+    square_brackets = 0
+    
+    last_open = []
+
+    for char in s:
+        if char == '(':
+            parentheses += 1
+            last_open.append('(')
+        elif char == '{':
+            curly_braces += 1
+            last_open.append('{')
+        elif char == '[':
+            square_brackets += 1
+            last_open.append('[')
+        elif char == ')':
+            if parentheses == 0 or (last_open and last_open[-1] != '('):
+                return False
+            parentheses -= 1
+            last_open.pop()
+        elif char == '}':
+            if curly_braces == 0 or (last_open and last_open[-1] != '{'):
+                return False
+            curly_braces -= 1
+            last_open.pop()
+        elif char == ']':
+            if square_brackets == 0 or (last_open and last_open[-1] != '['):
+                return False
+            square_brackets -= 1
+            last_open.pop()
+    return parentheses == 0 and curly_braces == 0 and square_brackets == 0
+
+print(isValid("[{()}]")) 
