@@ -1,0 +1,70 @@
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <string>
+#include <set>
+
+using namespace std;
+
+int atMostKDistinct(const string& s, int k, set<string>& substrings) {
+    int n = s.size();
+    unordered_map<char, int> char_count;
+    int left = 0, count = 0;
+
+    for (int right = 0; right < n; ++right) {
+        char_count[s[right]]++;
+
+    
+        while (char_count.size() > k) {
+            char_count[s[left]]--;
+            if (char_count[s[left]] == 0) {
+                char_count.erase(s[left]);
+            }
+            left++;
+        }
+
+        
+        for (int i = left; i <= right; ++i) {
+            substrings.insert(s.substr(i, right - i + 1));
+        }
+
+        count += right - left + 1;
+    }
+
+    return count;
+}
+
+int countKDistinctSubstrings(const string& s, int k) {
+    set<string> substringsAtMostK, substringsAtMostKMinus1;
+
+    
+    atMostKDistinct(s, k, substringsAtMostK);
+
+    
+    atMostKDistinct(s, k - 1, substringsAtMostKMinus1);
+
+    // Find the difference: substrings with exactly k distinct characters
+    set<string> exactKDistinct;
+    for (const auto& substring : substringsAtMostK) {
+        if (substringsAtMostKMinus1.find(substring) == substringsAtMostKMinus1.end()) {
+            exactKDistinct.insert(substring);
+        }
+    }
+
+    // Print all substrings with exactly k distinct characters
+    cout << "Substrings with exactly " << k << " distinct characters:\n";
+    for (const auto& substring : exactKDistinct) {
+        cout << substring << "\n";
+    }
+
+    return exactKDistinct.size();
+}
+
+// Example usage
+int main() {
+    string s = "pqpqs";
+    int k = 2;
+    int result = countKDistinctSubstrings(s, k);
+    cout << "Total count: " << result << endl;
+    return 0;
+}
